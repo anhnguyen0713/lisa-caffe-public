@@ -1,3 +1,46 @@
+This repository holds the codes and models for my paper at IEEE GCCE 2018 Conference.
+>
+**Fast Recognition of Human Actions Using Autocorrelation Sequence**; Anh H. Nguyen, Huyen T. T. Tran, Truong Cong Thang, Yong Man Ro ([link](https://ieeexplore.ieee.org/document/8574820))
+
+## 1. Compute video autocorrelation
+Run this MatLab script to compute autocorrelation sequences of input videos.
+```
+examples/LRCN_activity_recognition/human_action_recognition/compute_autocorr.m
+```
+This script calculates autocorrelation sequences of all videos and writes all autocorrelation sequences into ```video_corr.txt```.
+
+## 2. Find global minima and its adjacent maxima
+Run the following script to compute global maxima and adjacent maxima of autocorrelation sequences using the file ```video_corr.txt``` obtained from the last step.
+```
+examples/LRCN_activity_recognition/human_action_recognition/process_corr.py
+```
+Output of this script is a new text file containing all videos for testing in the form 
+```
+video_name true_label minimum_position maximum_position
+```
+
+## 3. Clasify videos
+Run the following script to classify action videos using the new test list file.
+```
+examples/LRCN_activity_recognition/human_action_recognition/classify_video_argument.py
+```
+There are few parameters controlling the inference process.
+```
+Params 		  Meaning                       Values	
+ -test    file listing test videos          xxx.txt				
+ -o       name of output file               xxx.txt				
+ -c       clip length                       integer				
+ -m       type of input                     'rgb', 'flow'		
+ -l       number of overlaping frames       integer				
+ -s       starting frame of input segment   '0', 'gmin', 'lmax'	
+ -e       end frame of input segment        '0', 'gmin', 'lmax', 'vlength'	
+```
+For example, this is the command to run the simple model (non-onverlapping clips) using proposed strategy 3 (from the first frame to the maximum immediately following the global minimum) with RGB modality
+```
+python examples/LRCN_activity_recognition/human_action_recognition/classify_video_argument.py 
+-test ucf101_split1_minima_maxima.txt -o simple_rgb_s3.txt -c 16 -m rgb -l 0 -s 0 -e lmax
+```
+
 # Caffe
 
 Caffe is a deep learning framework made with expression, speed, and modularity in mind.
