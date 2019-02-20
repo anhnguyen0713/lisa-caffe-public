@@ -9,7 +9,7 @@ examples/LRCN_activity_recognition/human_action_recognition/compute_autocorr.m
 ```
 This script calculates autocorrelation sequences of all videos and writes all autocorrelation sequences into ```video_corr.txt```.
 
-## 2. Find global minima and its adjacent maxima
+## 2. Find global minimum and its adjacent maximum
 Run the following script to compute global maxima and adjacent maxima of autocorrelation sequences using the file ```video_corr.txt``` obtained from the last step.
 ```
 examples/LRCN_activity_recognition/human_action_recognition/process_corr.py
