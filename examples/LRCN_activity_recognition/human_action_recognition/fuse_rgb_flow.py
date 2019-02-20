@@ -51,8 +51,6 @@ for i in range(0, num_videos):
 	line_rgb = f_rgb_lines[i]
 	line_rgb = line_rgb.split()
 	video = line_rgb[0]
-	if i<10:
-		print str(i) + ' ' + video
 	label = int(line_rgb[1])
 	rgb_prob = np.array(line_rgb[2:num_classes+2]).astype(np.float32)
 
@@ -72,6 +70,4 @@ for i in range(0, num_videos):
 	predicted_label, = np.where(fused_prob == np.max(fused_prob))
 	predicted_labels.append(predicted_label[0])
 
-print true_labels[0:10]
-print predicted_labels[0:10]
 print 'Accuracy: ' + str(accuracy_score(true_labels, predicted_labels)*100) + '%'
