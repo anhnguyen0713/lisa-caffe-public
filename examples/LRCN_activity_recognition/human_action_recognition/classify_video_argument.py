@@ -17,13 +17,13 @@ flow_video_path = '/media/anhnguyen/Data/lisa-caffe-public/UCF-101/flow_images/'
 
 
 ################ LIST OF PARAMETERS #############################################
-# Params 		Meaning							Values							#
-# -test 	file of test videos 				xxx.txt							#
-# -o		name of output file					xxx.txt							#
-# -c		clip length 						integer							#
-# -m		type of input 						'rgb', 'flow'					#
-# -l		number of overlap frames 			integer							#
-# -s		starting frame of input segment		'0', 'gmin', 'lmax'				#
+# Params 		Meaning							Values				#
+# -test 	file of test videos 				xxx.txt				#
+# -o		name of output file					xxx.txt				#
+# -c		clip length 						integer				#
+# -m		type of input 						'rgb', 'flow'		#
+# -l		number of overlap frames 			integer				#
+# -s		starting frame of input segment		'0', 'gmin', 'lmax'	#
 # -e		end frame of input segment			'0', 'gmin', 'lmax', 'vlength'	#
 #################################################################################
 
@@ -112,7 +112,6 @@ def all_frame_overlap_sample(CLIP_LENGTH, start_point, end_point, global_min=0):
 	return selected_indices
 
 
-#Classify videos with LRCN model with negative peak only
 def LRCN_classify_video(videos, labels, minima, maxima, net, transformer, is_flow):
 	labels_prediction = []
 	total_time = 0
@@ -243,7 +242,7 @@ lstm_model = '../deploy_lstm.prototxt'
 RGB_lstm = '../RGB_lstm_model_iter_30000.caffemodel'
 flow_lstm = '../flow_lstm_model_iter_50000.caffemodel'
 
-# Read test list with negative peak only
+# Read test list 
 f = open(TEST_FILE, 'r')
 f_lines = f.readlines()
 f.close()
@@ -255,8 +254,8 @@ for _, line in enumerate(f_lines):
 	line = line.split(' ')
 	video = line[0] # video name
 	label = int(line[1]) # video label
-	minimum = int(line[2]) # negative peak
-	maximum = int(line[3]) # adjacent maxima
+	minimum = int(line[2]) # global minimum
+	maximum = int(line[3]) # adjacent maximum
 
 	videos.append(video)
 	labels.append(label)
