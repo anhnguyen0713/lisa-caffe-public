@@ -41,6 +41,14 @@ python examples/LRCN_activity_recognition/human_action_recognition/classify_vide
 -test ucf101_split1_minima_maxima.txt -o simple_rgb_s3.txt -c 16 -m rgb -l 0 -s 0 -e lmax
 ```
 
+## 4. Fuse scores
+To fuse prediction scores of two modalities (RGB and Flow), run ```fuse_rgb_flow.py``` script as follows:
+```
+python examples/LRCN_activity_recognition/human_action_recognition/fuse_rgb_flow.py 
+-rgb rgb_prediction.txt -flow flow_prediction.txt -w 0.333333
+```
+Here, ```0.33333``` is fusion weight of RGB modality, which means fusion weight of Flow modality is ```0.666667 (2/3)```.
+
 # Caffe
 
 Caffe is a deep learning framework made with expression, speed, and modularity in mind.
